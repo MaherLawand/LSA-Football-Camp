@@ -10,6 +10,7 @@ function App() {
     phoneNumber: '',
     whatsappNumber: '',
     emailAddress: '',
+homeaddress: '',
 
     playerFullName: '',
     dateOfBirth: '',
@@ -361,6 +362,17 @@ if (!result.success) {
                 required
               />
             </div>
+            <div className="form-group full-width">
+  <label>Home Address</label>
+
+  <textarea
+    rows="3"
+    name="homeAddress"
+    value={formData.homeAddress}
+    onChange={handleChange}
+    required
+  />
+</div>
           </div>
 
           <div className="section-title">Player Information</div>
