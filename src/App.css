@@ -17,17 +17,15 @@ body {
     radial-gradient(circle at top, #1f2937, #0b0f19 60%);
 }
 .logo {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-
-  width: 90px;
+  width: 150px;
   height: auto;
 
   object-fit: contain;
 
+  margin-bottom: 18px;
+
   filter:
-    drop-shadow(0 10px 20px rgba(0,0,0,0.35));
+    drop-shadow(0 12px 24px rgba(0,0,0,0.35));
 
   user-select: none;
   pointer-events: none;
@@ -43,7 +41,12 @@ body {
 .hero-subtitles h2 {
   font-size: 1.4rem;
   font-weight: 700;
+
+  font-style: italic;
+
   color: #93c5fd;
+
+  letter-spacing: 0.5px;
 }
 
 .hero-subtitles h3 {
@@ -67,6 +70,10 @@ body {
 .hero {
   text-align: center;
   margin-bottom: 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero h1 {

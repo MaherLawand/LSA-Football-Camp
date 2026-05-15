@@ -287,19 +287,16 @@ if (!result.success) {
     <div className="app">
     <div className="container">
     <div className="hero">
-  <img
+ <img
     src="/logo.png"
     alt="LSA Logo"
     className="logo"
   />
-
-  <h1>LSA Football Camp</h1>
-
+  <h1>LSA Sports Academy</h1>
   <div className="hero-subtitles">
     <h2>Elite Performance Lab</h2>
     <h3>Summer Edition</h3>
   </div>
-
   <p>
     Complete the registration form below
   </p>
