@@ -533,20 +533,26 @@ if (!result.success) {
 )}
 
             <div className="form-group">
-              <label>T-Shirt Size</label>
-              <select
-                name="tshirtSize"
-                value={formData.tshirtSize}
-                onChange={handleChange}
-              >
-                <option value="">Select Size</option>
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-              </select>
-            </div>
+  <label>T-Shirt Size</label>
+
+  <select
+    name="tshirtSize"
+    value={formData.tshirtSize}
+    onChange={handleChange}
+  >
+    <option value="">Select Size</option>
+
+    <option value="4Y">4Y</option>
+    <option value="6Y">6Y</option>
+    <option value="8Y">8Y</option>
+    <option value="10Y">10Y</option>
+    <option value="12Y">12Y</option>
+    <option value="14Y">14Y</option>
+    <option value="16Y">16Y</option>
+    <option value="18Y">18Y</option>
+    <option value="20Y">20Y</option>
+  </select>
+</div>
 
             <div className="form-group full-width">
               <label>Notes</label>
