@@ -24,24 +24,33 @@ function App() {
     emergencyContactNumber: '',
 
     programsSelected: '',
-    transportationNeeded: '',
+    insuranceAvailable: '',
+insuranceType: '',
     tshirtSize: '',
 
     paymentStatus: 'Pending',
+    paymentMethod: '',
+paymentPhoneNumber: '',
     notes: '',
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
 const age = Number(formData.age)
-  const handleChange = (e) => {
-    const { name, value } = e.target
+const handleChange = (e) => {
+  const { name, value } = e.target
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
+  setFormData((prev) => ({
+    ...prev,
+
+    [name]: value,
+
+    ...(name === 'insuranceAvailable' &&
+    value === 'No'
+      ? { insuranceType: '' }
+      : {}),
+  }))
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -175,7 +184,35 @@ if (!formData.tshirtSize) {
   setIsSubmitting(false)
   return
 }
+if (!formData.paymentMethod) {
+  setSubmitMessage(
+    'Please select a payment method.'
+  )
+  setIsSubmitting(false)
+  return
+}
 
+if (
+  !formData.paymentPhoneNumber.trim()
+) {
+  setSubmitMessage(
+    'Please enter the payment phone number.'
+  )
+  setIsSubmitting(false)
+  return
+}
+
+if (
+  !phoneRegex.test(
+    formData.paymentPhoneNumber
+  )
+) {
+  setSubmitMessage(
+    'Invalid payment phone number.'
+  )
+  setIsSubmitting(false)
+  return
+}
       // await fetch(scriptURL, {
       //   method: 'POST',
       //   mode: 'no-cors',
@@ -203,34 +240,41 @@ if (!result.success) {
 }
       setSubmitMessage('Registration submitted successfully!')
 
-      setFormData({
-        registrationId: crypto.randomUUID(),
+     setFormData({
+  registrationId: crypto.randomUUID(),
 
-        parentFullName: '',
-        relationship: '',
-        phoneNumber: '',
-        whatsappNumber: '',
-        emailAddress: '',
+  parentFullName: '',
+  relationship: '',
+  phoneNumber: '',
+  whatsappNumber: '',
+  emailAddress: '',
 
-        playerFullName: '',
-        dateOfBirth: '',
-        age: '',
+  playerFullName: '',
+  dateOfBirth: '',
+  age: '',
 
-        position: '',
-        currentClub: '',
-        footballExperience: '',
-        medicalCondition: '',
+  position: '',
+  currentClub: '',
+  footballExperience: '',
+  medicalCondition: '',
 
-        emergencyContactName: '',
-        emergencyContactNumber: '',
+  emergencyContactName: '',
+  emergencyContactNumber: '',
 
-        programsSelected: '',
-        transportationNeeded: '',
-        tshirtSize: '',
+  programsSelected: '',
 
-        paymentStatus: 'Pending',
-        notes: '',
-      })
+  insuranceAvailable: '',
+  insuranceType: '',
+
+  tshirtSize: '',
+
+  paymentStatus: 'Pending',
+
+  paymentMethod: '',
+  paymentPhoneNumber: '',
+
+  notes: '',
+})
     } catch (error) {
       console.error(error)
       setSubmitMessage('Error submitting registration.')
@@ -242,10 +286,24 @@ if (!result.success) {
   return (
     <div className="app">
     <div className="container">
-      <div className="hero">
-        <h1>LSA Football Camp</h1>
-        <p>Complete the registration form below</p>
-      </div>
+    <div className="hero">
+  <img
+    src="/logo.png"
+    alt="LSA Logo"
+    className="logo"
+  />
+
+  <h1>LSA Football Camp</h1>
+
+  <div className="hero-subtitles">
+    <h2>Elite Performance Lab</h2>
+    <h3>Summer Edition</h3>
+  </div>
+
+  <p>
+    Complete the registration form below
+  </p>
+</div>
       <form
         onSubmit={handleSubmit}
         className="registration-form"
@@ -420,27 +478,62 @@ if (!result.success) {
 
           <div className="grid">
             <div className="form-group">
-              <label>Programs Selected</label>
-              <input
-                type="text"
-                name="programsSelected"
-                value={formData.programsSelected}
-                onChange={handleChange}
-              />
-            </div>
+
+  <label>Program Duration</label>
+
+  <select
+    name="programsSelected"
+    value={formData.programsSelected}
+    onChange={handleChange}
+  >
+    <option value="">Select Program</option>
+    <option value="3 Weeks">
+      3 Weeks
+    </option>
+    <option value="5 Weeks">
+      5 Weeks
+    </option>
+  </select>
+</div>
 
             <div className="form-group">
-              <label>Transportation Needed</label>
-              <select
-                name="transportationNeeded"
-                value={formData.transportationNeeded}
-                onChange={handleChange}
-              >
-                <option value="">Select</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
+
+  <label>Insurance Available</label>
+
+  <select
+
+    name="insuranceAvailable"
+
+    value={formData.insuranceAvailable}
+
+    onChange={handleChange}
+
+  >
+
+    <option value="">Select</option>
+
+    <option value="Yes">Yes</option>
+
+    <option value="No">No</option>
+
+  </select>
+
+</div>
+
+{formData.insuranceAvailable === 'Yes' && (
+  <div className="form-group">
+    <label>Insurance Type</label>
+
+    <input
+      type="text"
+      name="insuranceType"
+      value={formData.insuranceType}
+      onChange={handleChange}
+      placeholder="Enter insurance type"
+      required
+    />
+  </div>
+)}
 
             <div className="form-group">
               <label>T-Shirt Size</label>
@@ -468,6 +561,50 @@ if (!result.success) {
               />
             </div>
           </div>
+
+          <div className="section-title">
+  Payment Information
+</div>
+
+<div className="grid">
+  <div className="form-group">
+    <label>Payment Method</label>
+
+    <select
+      name="paymentMethod"
+      value={formData.paymentMethod}
+      onChange={handleChange}
+      required
+    >
+      <option value="">
+        Select Payment Method
+      </option>
+
+      <option value="OMT">
+        Paid by OMT
+      </option>
+
+      <option value="Neo">
+        Paid by Neo
+      </option>
+    </select>
+  </div>
+
+  <div className="form-group">
+    <label>
+      Payment Phone Number
+    </label>
+
+    <input
+      type="tel"
+      name="paymentPhoneNumber"
+      value={formData.paymentPhoneNumber}
+      onChange={handleChange}
+      placeholder="Enter payment receiver phone number"
+      required
+    />
+  </div>
+</div>
 
           <button
             type="submit"
