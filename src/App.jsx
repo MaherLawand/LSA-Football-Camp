@@ -33,7 +33,7 @@ function App() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
-
+const age = Number(formData.age)
   const handleChange = (e) => {
     const { name, value } = e.target
 
@@ -56,6 +56,52 @@ function App() {
 
 if (formData.parentFullName.trim().length < 3) {
   setSubmitMessage('Parent full name is too short.')
+  setIsSubmitting(false)
+  return
+}
+if (!formData.dateOfBirth) {
+  setSubmitMessage('Please enter a valid date of birth.')
+  setIsSubmitting(false)
+  return
+}
+
+const birthDate = new Date(formData.dateOfBirth)
+const today = new Date()
+
+if (birthDate > today) {
+  setSubmitMessage(
+    'Date of birth cannot be in the future.'
+  )
+  setIsSubmitting(false)
+  return
+}
+
+let calculatedAge =
+  today.getFullYear() - birthDate.getFullYear()
+
+const monthDifference =
+  today.getMonth() - birthDate.getMonth()
+
+if (
+  monthDifference < 0 ||
+  (monthDifference === 0 &&
+    today.getDate() < birthDate.getDate())
+) {
+  calculatedAge--
+}
+
+if (calculatedAge < 2 || calculatedAge > 30) {
+  setSubmitMessage(
+    'Date of birth does not match allowed age range.'
+  )
+  setIsSubmitting(false)
+  return
+}
+
+if (Number(formData.age) !== calculatedAge) {
+  setSubmitMessage(
+    `Age does not match date of birth. Correct age is ${calculatedAge}.`
+  )
   setIsSubmitting(false)
   return
 }
@@ -106,9 +152,9 @@ if (
 
 const age = Number(formData.age)
 
-if (age < 4 || age > 25) {
+if (age < 2 || age > 30) {
   setSubmitMessage(
-    'Age must be between 4 and 25.'
+    'Age must be between 2 and 30.'
   )
   setIsSubmitting(false)
   return
@@ -195,13 +241,15 @@ if (!result.success) {
 
   return (
     <div className="app">
-      <div className="container">
-        <div className="hero">
-          <h1>LSA Football Camp</h1>
-          <p>Complete the registration form below</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="registration-form">
+    <div className="container">
+      <div className="hero">
+        <h1>LSA Football Camp</h1>
+        <p>Complete the registration form below</p>
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="registration-form"
+      >
           <div className="section-title">Parent Information</div>
 
           <div className="grid">
@@ -428,18 +476,21 @@ if (!result.success) {
           >
             {isSubmitting ? 'Submitting...' : 'Complete Registration'}
           </button>
+           </form>
+      </div>
 
           {submitMessage && (
-            <div
-              className={`message ${
-                submitMessage.includes('Error') ? 'error' : 'success'
-              }`}
-            >
-              {submitMessage}
-            </div>
-          )}
-        </form>
-      </div>
+  <div
+    className={`floating-message ${
+      submitMessage.toLowerCase().includes('success')
+  ? 'success'
+  : 'error'
+    }`}
+  >
+    {submitMessage}
+  </div>
+)}
+       
     </div>
   )
 }
