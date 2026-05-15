@@ -10,7 +10,7 @@ function App() {
     phoneNumber: '',
     whatsappNumber: '',
     emailAddress: '',
-homeaddress: '',
+homeAddress: '',
 
     playerFullName: '',
     dateOfBirth: '',
@@ -249,7 +249,7 @@ if (!result.success) {
   phoneNumber: '',
   whatsappNumber: '',
   emailAddress: '',
-
+      homeAddress: '',
   playerFullName: '',
   dateOfBirth: '',
   age: '',
@@ -365,8 +365,7 @@ if (!result.success) {
             <div className="form-group full-width">
   <label>Home Address</label>
 
-  <textarea
-    rows="3"
+  <input
     name="homeAddress"
     value={formData.homeAddress}
     onChange={handleChange}
