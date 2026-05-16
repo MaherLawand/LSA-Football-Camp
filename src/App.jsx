@@ -593,13 +593,16 @@ if (!result.success) {
       <option value="">
         Select Payment Method
       </option>
+<option value="Cash">
+Pay by Cash
+</option>
 
       <option value="OMT">
-        Paid by OMT
+        Pay by OMT
       </option>
 
       <option value="Neo">
-        Paid by Neo
+        Pay by Neo
       </option>
     </select>
   </div>
