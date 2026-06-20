@@ -29,6 +29,8 @@ homeAddress: '',
 insuranceType: '',
     tshirtSize: '',
 
+    discountReferralSource: '',
+
     paymentStatus: 'Pending',
     paymentMethod: '',
 paymentPhoneNumber: '',
@@ -268,6 +270,8 @@ if (!result.success) {
   insuranceType: '',
 
   tshirtSize: '',
+
+  discountReferralSource: '',
 
   paymentStatus: 'Pending',
 
@@ -564,6 +568,16 @@ if (!result.success) {
     <option value="20Y">20Y</option>
   </select>
 </div>
+
+            <div className="form-group full-width">
+              <label>Discount Referral Source</label>
+              <input
+                type="text"
+                name="discountReferralSource"
+                value={formData.discountReferralSource}
+                onChange={handleChange}
+              />
+            </div>
 
             <div className="form-group full-width">
               <label>Notes</label>
