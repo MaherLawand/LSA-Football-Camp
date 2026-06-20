@@ -29,7 +29,7 @@ homeAddress: '',
 insuranceType: '',
     tshirtSize: '',
 
-    discountReferralSource: '',
+    specialPriceCompanyReferral: '',
 
     paymentStatus: 'Pending',
     paymentMethod: '',
@@ -271,7 +271,7 @@ if (!result.success) {
 
   tshirtSize: '',
 
-  discountReferralSource: '',
+  specialPriceCompanyReferral: '',
 
   paymentStatus: 'Pending',
 
@@ -570,11 +570,11 @@ if (!result.success) {
 </div>
 
             <div className="form-group full-width">
-              <label>Discount Referral Source</label>
+              <label>Special Price Company Referral</label>
               <input
                 type="text"
-                name="discountReferralSource"
-                value={formData.discountReferralSource}
+                name="specialPriceCompanyReferral"
+                value={formData.specialPriceCompanyReferral}
                 onChange={handleChange}
               />
             </div>

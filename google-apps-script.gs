@@ -108,7 +108,7 @@ function doPost(e) {
       data.paymentMethod,
       data.paymentPhoneNumber,
 
-      data.discountReferralSource,
+      data.specialPriceCompanyReferral,
 
       data.notes,
 
